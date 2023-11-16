@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: url('https://i.pinimg.com/originals/3a/ea/25/3aea25cbf2b2c738edd8dc623df94ed2.gif') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .ball {
+      width: 50px;
+      height: 50px;
+      background-image: url('https://i.pinimg.com/236x/4c/04/f3/4c04f36900bf59b0a0111c6befda5049.jpg'); /* Replace with the actual URL of your basketball image */
+      background-size: cover;
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer; 
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const numberOfBalls = 5;
+      const balls = [];
+      const initialSpeed = 4; 
+
+      for (let i = 0; i < numberOfBalls; i++) {
+        createBall();
+      }
+
+      function createBall() {
+        const ball = document.createElement("div");
+        ball.className = "ball";
+        document.body.appendChild(ball);
+        balls.push({ element: ball, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, xSpeed: (Math.random() - 0.5) * initialSpeed, ySpeed: (Math.random() - 0.5) * initialSpeed });
+
+        ball.addEventListener("click", function() {
+          
+        });
+
+        function animateBall() {
+          balls.forEach(b => {
+            b.x += b.xSpeed;
+            b.y += b.ySpeed;
+
+            if (b.x + ball.offsetWidth > window.innerWidth || b.x < 0) {
+              b.xSpeed = -b.xSpeed;
+            }
+
+            if (b.y + ball.offsetHeight > window.innerHeight || b.y < 0) {
+              b.ySpeed = -b.ySpeed;
+            }
+
+            b.element.style.transform = `translate(${b.x}px, ${b.y}px)`;
+          });
+
+          requestAnimationFrame(animateBall);
+        }
+
+        animateBall();
+      }
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
